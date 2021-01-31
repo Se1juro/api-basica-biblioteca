@@ -5,12 +5,13 @@ const {validatePostError} = require('../../middlewares')
 const {
     validateContentDataRental,
     validateBookRentado,
-    validateExistsBook
+    validateExistsBook,
+    validateUserExists
 } = require('../../middlewares/validateRental');
 router.get('/pagination', controller.getPagination)
 router.get('/:id', controller.getRentalById);
 router.get('/', controller.getRentals);
 router.get('/book/:id', controller.getRentalByBook);
-router.post('/', validateContentDataRental(),validateExistsBook, validateBookRentado, validatePostError, controller.postRental);
-router.delete('/:id',controller.deleteRental)
+router.post('/', validateContentDataRental(), validateUserExists, validateExistsBook, validateBookRentado, validatePostError, controller.postRental);
+router.delete('/:id', controller.deleteRental)
 module.exports = router;

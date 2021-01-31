@@ -1,5 +1,6 @@
 const {getBookById} = require("../components/books/dao");
-const {getRentalByBook} = require("../components/rentals/dao")
+const {getRentalByBook} = require("../components/rentals/dao");
+const {getUserById} = require("../components/users/dao");
 const {body} = require("express-validator");
 module.exports.validateContentDataRental = () => {
     return [
@@ -25,3 +26,12 @@ module.exports.validateExistsBook = async (req, res, next) => {
     }
     next();
 };
+module.exports.validateUserExists = async (req,res,next)=>{
+    const user = await getUserById(req.body.idUser)
+    if (!user){
+        return res.status(409).json({
+            message:'No se ha encontrado el usuario'
+        })
+    }
+    next();
+}

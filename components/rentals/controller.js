@@ -21,6 +21,7 @@ module.exports = {
             const rental = await RentalModel.getRentalById(id);
             return res.status(200).json(RentalDto.single(rental));
         }catch (e) {
+            console.log(e)
             return res.status(500).json({message:'No se pudieron obtener los datos del prestamo'})
         }
     },
